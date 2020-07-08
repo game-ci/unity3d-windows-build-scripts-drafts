@@ -35,6 +35,7 @@ UNITY_EXIT_CODE=$?
 
 set -e
 
+# read the unity log at and of build, this is the only way I managed to get output in the console and it's not very reliable
 cat $UNITY_LOG_PATH
 
 if [ $UNITY_EXIT_CODE -eq 0 ]; then
