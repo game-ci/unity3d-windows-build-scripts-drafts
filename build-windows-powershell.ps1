@@ -2,7 +2,6 @@
 $ErrorActionPreference = "Stop"
 
 Write-Host "$(date) Starting build script"-ForegroundColor green
-
 Write-Host "Running as '$env:UserName' on domain '$env:UserDomain' on system '$env:ComputerName'"
 
 Set-ExecutionPolicy Bypass -Scope Process -Force
@@ -25,7 +24,9 @@ $build_name = $env:BUILD_NAME
 $build_path = "./Builds/$build_target/"
 $build_log = ".\build.log"
 
-# Don't mind errors here (Get-YamlDocuments : Exception calling "Load" with "1" argument(s): "(Line: 1, Col: 1, Idx: 0) - (Line: 1, Col: 2, Idx:) is SAFE!!
+# Don't mind errors here
+# You will see the following error in the logs but it's safe and build continues, it's just annoying:
+#   Get-YamlDocuments : Exception calling "Load" with "1" argument(s): "(Line: 1, Col: 1, Idx: 0) - (Line: 1, Col: 2, Idx:
 $ErrorActionPreference = "Continue"
 
 New-Item -Path $build_path -ItemType "directory"
