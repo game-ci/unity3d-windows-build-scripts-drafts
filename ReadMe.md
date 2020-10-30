@@ -9,7 +9,7 @@ I could have created a gist for these, but I think I still don't receive notific
 
 ## [github-actions-windows-jessetg](./github-actions-windows-jessetg)
 
-These are some files shared by JesseTG which could also come handy if you intend to build unity things on a windows runner some day :v:.
+These are some files shared by JesseTG which could also come handy if you intend to build unity things on a windows runner some day :v:. _Note: building from a windows runner can also build for different platforms such as macOS, Linux, etc._
 
 ## License
 
