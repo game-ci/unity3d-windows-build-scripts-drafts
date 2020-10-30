@@ -1,0 +1,142 @@
+name: 'Run Unity'
+description: 'Run Unity with any command-line arguments (plus a few extras for Trimmer)'
+author: Jesse Talavera-Greenberg
+inputs:
+  batchmode:
+    required: true
+    default: "true"
+    description: |
+      Run Unity in batch mode. Always use this in conjunction with the other
+      command line arguments to ensure no pop-up windows appear and eliminate
+      the need for any human intervention. When an exception occurs during
+      execution of the script code, the Asset server updates fail, or other
+      operations fail, Unity immediately exits with return code 1.
+
+      Note that in batch mode, Unity sends a minimal version of its log output
+      to the console. However, the Log Files still contain the full log
+      information. You cannot open a project in batch mode while the Editor has
+      the same project open; only a single instance of Unity can run at a time.
+
+      To check whether the Editor or Standalone Player is running in batch mode
+      use the Application.isBatchMode operator.
+
+      If the project has not yet been imported when using -batchmode, the
+      target platform is the default one. To force a different platform, use
+      the -buildTarget option.
+
+  buildTarget:
+    required: false
+    description: |
+      Only build one target in a build profile
+
+  disable-assembly-updater:
+    required: false
+    description: |
+      Specify a space-separated list of assembly names as parameters for Unity
+      to ignore on automatic updates.
+
+      The space-separated list of assembly names is optional: pass the command
+      line options without any assembly names to ignore all assemblies.
+
+  executeMethod:
+    required: false
+    description: |
+      Execute the static method as soon as Unity opens the project, and after
+      the optional Asset server update is complete. You can use this to do tasks
+      such as continous integration, performing Unit Tests, making builds or
+      preparing data. To return an error from the command line process, either
+      throw an exception which causes Unity to exit with return code 1, or call
+      EditorApplication.Exit with a non-zero return code. To pass parameters,
+      add them to the command line and retrieve them inside the function using
+      System.Environment.GetCommandLineArgs. To use -executeMethod, you need to
+      place the enclosing script in an Editor folder. The method you execute must
+      be defined as static.
+
+  forgetProjectPath:
+    required: false
+    default: "true"
+    description: |
+      Don't save your current Project into the Unity launcher/hub history.
+
+  logFile:
+    required: false
+    default: "-"
+    description: |
+      Specify where Unity writes the Editor or Windows/Linux/OSX standalone log
+      file. To output to the console, specify - for the path name. On Windows,
+      specify - option to ensure output goes to stdout, which is not the console
+      by default.
+
+  nographics:
+    required: true
+    default: "true"
+    description: |
+      When you run this in batch mode, it does not initialize the graphics
+      device. You can then run automated workflows on machines that don’t have
+      a GPU. Automated workflows only work when you have a window in focus,
+      otherwise you can’t send simulated input commands. -nographics does not
+      allow you to bake GI as Enlighten requires GPU acceleration.
+
+  output:
+    required: true
+    description: |
+      The path at which the build is saved by Trimmer.
+
+  profileName:
+    required: false
+    description: |
+      The name of the Trimmer build profile to use. Do not include the directory
+      or file extension.
+
+  projectPath:
+    required: true
+    default: ${{ github.workspace }}
+    description: Path of the Unity project (defaults to `pwd`)
+
+  quit:
+    required: false
+    description: |
+      Quit the Unity Editor after other commands have finished executing. This
+      can cause error messages to be hidden (however, they still appear in the
+      Editor.log file).
+
+  runTests:
+    required: false
+    description: |
+      Runs tests in the Project.
+
+  silent-crashes:
+    required: false
+    default: "true"
+    description: |
+      Prevent Unity from displaying the dialog that appears when a Standalone
+      Player crashes. This argument is useful when you want to run the Player
+      in automated builds or tests, where you don’t want a dialog prompt to
+      obstruct automation.
+
+  stackTraceLogType:
+    required: false
+    description: |
+      Allow detailed debugging. All settings allow None, Script Only and Full
+      to be selected. (for example, -stackTraceLogType Full)
+
+  testPlatform:
+    required: false
+    description: |
+      The platform you want to run tests on. Available platforms are EditMode
+      and PlayMode.
+
+  testResults:
+    required: false
+    description: |
+      The path where Unity should save the result file. By default, Unity
+      saves it in the Project’s root folder.
+
+  unity-version:
+    required: true
+    description: |
+      Full Unity version number (e.g. 2019.3.0f5).
+
+runs:
+  using: 'node12'
+  main: 'index.js'

@@ -7,6 +7,10 @@ https://github.com/webbertakken/unity-builder/issues/82
 
 I could have created a gist for these, but I think I still don't receive notifications out of gists and they're only repos with less features so here are some scripts.
 
+## [github-actions-windows-jessetg](./github-actions-windows-jessetg)
+
+These are some files shared by JesseTG which could also come handy if you intend to build unity things on a windows runner some day :v:.
+
 ## License
 
 [MIT](LICENSE.md) © [Gabriel Le Breton](https://gableroux.com)
